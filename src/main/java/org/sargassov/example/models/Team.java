@@ -1,10 +1,10 @@
 package org.sargassov.example.models;
 
 
+import org.sargassov.example.models.players.Player;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 
 public class Team {
     private static League league;
@@ -58,6 +58,7 @@ public class Team {
 //        addToSponsor();
 
     }
+
 
     public List<Player> getPlayerList() {
         return playerList;

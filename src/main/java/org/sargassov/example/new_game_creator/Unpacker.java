@@ -16,6 +16,7 @@ public abstract class Unpacker {
 
     @SneakyThrows
     protected Unpacker(String string){
+        league = League.getInstance();
         this.unpackerFilePath = string;
         Path path = Paths.get(unpackerFilePath);
 
@@ -25,10 +26,6 @@ public abstract class Unpacker {
                     + " in the class " + this.getClass().getName());
 
         dataList = Files.readAllLines(path, StandardCharsets.UTF_8);
-    }
-
-    public void setLeague(League league) {
-        Unpacker.league = league;
     }
 
     public abstract void readAndUnpack();

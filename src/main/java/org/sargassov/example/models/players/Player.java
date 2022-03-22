@@ -1,6 +1,7 @@
-package org.sargassov.example.models;
+package org.sargassov.example.models.players;
 
 import org.sargassov.example.Corrector;
+import org.sargassov.example.models.Team;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,18 +17,19 @@ public class Player {
     private Team team;
     private String teamName;
     private Position position;
-    private Integer number;
-    private Integer gkAble;
-    private Integer defAble;
-    private Integer midAble;
-    private Integer forwAble;
-    private Integer power;
-    private Integer captainAble;
-    private Integer tire = 0;
-    private Integer timeBeforeTreat;
-    private Integer yearBirth;
-    private Integer trainingAble;
-    private Integer trainingBalance;
+    private PlayerPriceSetter priceSetter;
+    private int number;
+    private int gkAble;
+    private int defAble;
+    private int midAble;
+    private int forwAble;
+    private int power;
+    private int captainAble;
+    private int tire;
+    private int timeBeforeTreat;
+    private int yearBirth;
+    private int trainingAble;
+    private int trainingBalance;
     private boolean isInjury = false;
     private boolean is11Th = false;
     private boolean isCapitan = false;
@@ -45,21 +47,86 @@ public class Player {
     public Player(){}
 
     public Player(String info) {
+        init();
+
         toComposite(info);
-
         positionsAndAblesInit();
-        trainingBalance = 0;
-        timeBeforeTreat = 0;
         trainingAble = (int) (Math.random() * 10 + 10);
-        price = priceToSell();
-
+        price = takePrice();
         power = findPower();
 
     }
 
-//    public static void setRfpl(Tournament rfpl) {
-//        Player.rfpl = rfpl;
-//    }
+    public Player(String name, int zero) { //Создание игрока
+
+        positionsAndAblesInit();
+        this.name = name;
+        natio = "Rus";
+        position = randomPosition();
+        number = zero;
+
+        youthabilities();
+        price = priceToSell();
+    }
+
+    private void init(){
+        if(priceSetter == null){
+            priceSetter = new PlayerPriceSetter();
+        }
+    }
+
+    private void toComposite(String info) { // создание юниора для пула молодых игроков
+
+        String[] mass = info.split("/");
+
+        name = mass[0];
+        yearBirth = Integer.parseInt(mass[1]);
+        natio = mass[2];
+        teamName = mass[3];
+        position = Corrector.stringInPos(mass[4]);;
+        gkAble = Integer.parseInt(mass[5]);
+        defAble = Integer.parseInt(mass[6]);
+        midAble = Integer.parseInt(mass[7]);
+        forwAble = Integer.parseInt(mass[8]);
+        captainAble = Integer.parseInt(mass[10]);
+        number = Integer.parseInt(mass[11]);
+    }
+
+    private void positionsAndAblesInit(){ // создание вспомогательных массивов для реализации игрока
+
+        positions = Arrays.asList(Position.GOALKEEPER, Position.DEFENDER,
+                Position.MIDFIELDER, Position.FORWARD);
+        ables = Arrays.asList(gkAble, defAble, midAble, forwAble);
+    }
+
+    private int priceToSell() { // определение цены игрока
+        int able;
+        double techPrice = 0;
+
+
+        for (int currentAble : ables) {
+            able = currentAble;
+
+            for (int i = 60, y = 0; i <= 100; i += 10, y++) {
+                if(able < i && y == 0){ techPrice += (priceCoeff[y] + able * mltpyCoeff[y]); break;}
+                else if (able < i) {techPrice += (priceCoeff[y] + (able - (i - 10)) * mltpyCoeff[y]); break;}
+            }
+        }
+
+        for (int i = 20, y = 0; i < 70; i += 10, y++) {
+            if (captainAble > i && captainAble < i + 11) techPrice *= captainCoeff[y];
+        }
+
+        if (captainAble > 70) techPrice *= 1.35;
+        if (isInjury) techPrice *= 0.8;
+        if (yearBirth < 1988) techPrice *= 0.8;
+
+        return (int) (techPrice * 1_000_000);
+    }
+
+    private int takePrice() { // определение цены игрока
+        return priceSetter.createPrice(this);
+    }
 
     private int findPower(){
         for(int x = 0; x < positions.size(); x++) {
@@ -70,29 +137,16 @@ public class Player {
         return 0;
     }
 
-    private void positionsAndAblesInit(){
-        positions = Arrays.asList(Position.GOALKEEPER, Position.DEFENDER,
-                Position.MIDFIELDER, Position.FORWARD);
-        ables = Arrays.asList(gkAble, defAble, midAble, forwAble);
-    }
 
     public void setTeam(Team team) {
         this.team = team;
     }
 
-    public Player(String name, int zero) {
 
-        positionsAndAblesInit();
-        this.name = name;
-        natio = "Rus";
-        position = randomPosition();
-        trainingBalance = 0;
-        timeBeforeTreat = 0;
-        number = zero;
 
-        youthabilities();
-        price = priceToSell();
-    }
+
+
+
 
     private void youthabilities() {
         captainAble = 1;
@@ -138,22 +192,7 @@ public class Player {
     }
 
 
-    private void toComposite(String info) {
 
-        String[] mass = info.split("/");
-
-        name = mass[0];
-        yearBirth = Integer.parseInt(mass[1]);
-        natio = mass[2];
-        teamName = mass[3];
-        position = Corrector.stringInPos(mass[4]);;
-        gkAble = Integer.parseInt(mass[5]);
-        defAble = Integer.parseInt(mass[6]);
-        midAble = Integer.parseInt(mass[7]);
-        forwAble = Integer.parseInt(mass[8]);
-        captainAble = Integer.parseInt(mass[10]);
-        number = Integer.parseInt(mass[11]);
-    }
 
 //    private Team selectTeam(String teamName) {
 //        for(Team t : rfpl.teams)
@@ -172,30 +211,7 @@ public class Player {
         return teamName;
     }
 
-    private int priceToSell() {
-       int able;
-       double techPrice = 0;
 
-       for (int currentAble : ables) {
-           able = currentAble;
-
-           for (int i = 60, y = 0; i <= 100; i += 10, y++) {
-               if(able < i && y == 0){ techPrice += (priceCoeff[y] + able * mltpyCoeff[y]); break;}
-               else if (able < i) {techPrice += (priceCoeff[y] + (able - (i - 10)) * mltpyCoeff[y]); break;}
-           }
-
-       }
-
-       for (int i = 20, y = 0; i < 70; i += 10, y++) {
-           if (captainAble > i && captainAble < i + 11) techPrice *= captainCoeff[y];
-       }
-
-       if (captainAble > 70) techPrice *= 1.35;
-       if (isInjury) techPrice *= 0.8;
-       if (yearBirth < 1988) techPrice *= 0.8;
-
-       return (int) (techPrice * 1_000_000);
-    }
 
     public static Integer YouthNumberCorrector(ArrayList<Player>list){
         ArrayList<Integer> numbers = new ArrayList<>();
@@ -243,6 +259,34 @@ public class Player {
 
         ables = Arrays.asList(gkAble, defAble, midAble, forwAble);
         price = priceToSell();
+    }
+
+    public int getGkAble() {
+        return gkAble;
+    }
+
+    public int getDefAble() {
+        return defAble;
+    }
+
+    public int getMidAble() {
+        return midAble;
+    }
+
+    public int getForwAble() {
+        return forwAble;
+    }
+
+    public int getCaptainAble() {
+        return captainAble;
+    }
+
+    public int getYearBirth() {
+        return yearBirth;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
 

@@ -13,6 +13,7 @@ public class SponsorsUnpack extends Unpacker{
 
     @Override
     public void readAndUnpack() {
-        dataList.forEach(s -> league.getSponsorList().add(new Sponsor(s)));
+        dataList.forEach(s -> League.getSponsorList().add(new Sponsor(s)));
+        System.out.println("sponsorList size = " + League.getSponsorList().size());
     }
 }

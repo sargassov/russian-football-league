@@ -3,6 +3,7 @@ package org.sargassov.example.models;
 
 import org.sargassov.example.coaches.CoachProgram;
 import org.sargassov.example.coaches.LevelOfCoach;
+import org.sargassov.example.models.players.Position;
 
 public class Coach {
     protected String name;

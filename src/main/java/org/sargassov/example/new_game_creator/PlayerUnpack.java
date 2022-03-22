@@ -1,6 +1,7 @@
 package org.sargassov.example.new_game_creator;
 
-import org.sargassov.example.models.Player;
+import org.sargassov.example.models.League;
+import org.sargassov.example.models.players.Player;
 import org.sargassov.example.models.Team;
 
 import java.util.Comparator;
@@ -14,39 +15,30 @@ public class PlayerUnpack extends Unpacker{
 
     @Override
     public void readAndUnpack() {
-        Player player = null;
-        for (String s : dataList) { player = new Player(s);}
+        for (String s : dataList) {
 
-        String s = player.getTeamName();
+            Player player = null;
+            player = new Player(s);
+            String teamName = player.getTeamName();
 
-        player.setTeam(league.getTeamList().stream()
-                .filter(t -> t.getName().equals(s)).findFirst().get());
+            player.setTeam(League.getTeamList().stream()
+                .filter(t -> t.getName().equals(teamName)).findFirst().get());
 
-        playerLastnameSorting();
-        for (Team t : league.getTeamList()) {  for (Player p : t.getPlayerList()) System.out.println(p.getName() + " " + p.getTeam());
+            player.getTeam().getPlayerList().add(player);
         }
 
-        System.out.println(player.getName() + " " + player.getTeam());
+        playerLastnameSorting();
     }
 
     private void playerLastnameSorting() {
-        league.getTeamList().forEach(team -> {
+        League.getTeamList().forEach(team -> {
             team.getPlayerList().sort(Comparator.comparing(Player::getName));
         });
+
+        for (Team t : League.getTeamList()) {
+            System.out.println("playerlist = " + t.getPlayerList().size());
+        }
     }
-
-
-//                        Player player = new Player(line);
-//                        for(Team t : rfpl.teams){
-//                            if(t.name.equals(player.team.name)){
-//                                t.playerList.add(player);
-//                                break;
-//                            }
-//                        }
-//                    }
-//
-//                    for(Team t : rfpl.teams){
-//                        t.playerList.sort(Comparator.comparing(o -> o.name));
-//                    }
 }
+
 

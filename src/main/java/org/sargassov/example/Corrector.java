@@ -1,13 +1,9 @@
 package org.sargassov.example;
 
 
-import org.sargassov.example.models.Position;
+import org.sargassov.example.models.players.Position;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Corrector {
     public static int inputIntMethod(int minimal, int maximal){

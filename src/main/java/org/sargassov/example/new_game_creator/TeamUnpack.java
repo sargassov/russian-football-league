@@ -1,5 +1,6 @@
 package org.sargassov.example.new_game_creator;
 
+import org.sargassov.example.models.League;
 import org.sargassov.example.models.Sponsor;
 import org.sargassov.example.models.Team;
 
@@ -17,9 +18,10 @@ public class TeamUnpack extends Unpacker{
 
     @Override
     public void readAndUnpack() {
-        dataList.forEach(s -> league.getTeamList().add(new Team(s)));
-        league.setTeamList(league.getTeamList().stream()
+        dataList.forEach(s -> League.getTeamList().add(new Team(s)));
+        League.setTeamList(League.getTeamList().stream()
                 .sorted(Comparator.comparing(Team::getName))
                 .collect(Collectors.toList()));
+        System.out.println("teamList = " + League.getTeamList().size());
     }
 }

@@ -9,7 +9,7 @@ public class NewGameCreator {
     private final League league;
 
     public NewGameCreator(){
-        league = new League();
+        league = League.getInstance();
     }
 
 
@@ -17,7 +17,6 @@ public class NewGameCreator {
 
     public void createGame(){
 
-        setLeague();
         new OpenSource().unpack();
 
 //        Strategy.strategyCreator(rfpl);
@@ -34,9 +33,4 @@ public class NewGameCreator {
 //
 //        MenuClass.gameMenu();
     }
-
-    private void setLeague() {
-        Unpacker.league = league;
-    }
-
 }

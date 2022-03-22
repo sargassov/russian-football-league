@@ -1,4 +1,4 @@
-package org.sargassov.example.models;
+package org.sargassov.example.models.players;
 
 public enum Position {GOALKEEPER, DEFENDER, MIDFIELDER, FORWARD};
 
