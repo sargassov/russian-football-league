@@ -1,10 +1,8 @@
-package org.sargassov.example.new_game_creator;
+package org.sargassov.example.new_game_creator.unpackers;
 
 import org.sargassov.example.models.League;
-import org.sargassov.example.models.Sponsor;
 import org.sargassov.example.models.Team;
 
-import javax.swing.text.TabExpander;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -13,7 +11,7 @@ public class TeamUnpack extends Unpacker{
 
     protected TeamUnpack() {
         super(clubsFile);
-        Team.setLeague(league);
+//        Team.setLeague(league);
     }
 
     @Override

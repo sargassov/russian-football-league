@@ -1,4 +1,4 @@
-package org.sargassov.example.new_game_creator;
+package org.sargassov.example.new_game_creator.unpackers;
 
 import lombok.SneakyThrows;
 import org.sargassov.example.models.League;

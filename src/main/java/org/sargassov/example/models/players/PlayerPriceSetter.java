@@ -23,7 +23,6 @@ public class PlayerPriceSetter {
     public PlayerPriceSetter() {
         this.positions = Arrays.asList(Position.GOALKEEPER, Position.DEFENDER,
                 Position.MIDFIELDER, Position.FORWARD);
-        this.ables = ables;
     }
 
     public int createPrice(Player player){
@@ -35,22 +34,6 @@ public class PlayerPriceSetter {
         captainValue(player, techPrice);
         yearBirthValue(player, techPrice);
 
-//        for (int currentAble : ables) {
-//            able = currentAble;
-//
-//            for (int i = 60, y = 0; i <= 100; i += 10, y++) {
-//                if(able < i && y == 0){ techPrice += (priceCoeff[y] + able * mltpyCoeff[y]); break;}
-//                else if (able < i) {techPrice += (priceCoeff[y] + (able - (i - 10)) * mltpyCoeff[y]); break;}
-//            }
-//        }
-
-//        for (int i = 20, y = 0; i < 70; i += 10, y++) {
-//            if (captainAble > i && captainAble < i + 11) techPrice *= captainCoeff[y];
-//        }
-
-//        if (captainAble > 70) techPrice *= 1.35;
-//        if (player.getYearBirth() < 1988) techPrice *= 0.8;
-
         return (int) (techPrice.priceInDounble * 1_000_000);
     }
 
@@ -59,8 +42,10 @@ public class PlayerPriceSetter {
     }
 
     private void captainValue(Player player, TechPrice techPrice) {
+
         for (int i = 20, y = 0; i < 70; i += 10, y++) {
-            if (player.getCaptainAble() > i && player.getCaptainAble() < i + 11) techPrice.priceInDounble *= captainCoeff[y];
+            if (player.getCaptainAble() > i && player.getCaptainAble() < i + 11)
+                techPrice.priceInDounble *= captainCoeff[y];
         }
         if (player.getCaptainAble() > 70) techPrice.priceInDounble *= 1.35;
     }

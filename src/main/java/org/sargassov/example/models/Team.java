@@ -7,14 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team {
-    private static League league;
+//    private static League league;
     private String name;
     private String homeTown;
     private Stadium stadium;
-    private long wealth;
-    private final long startWealth;
     private List<Coach> coaches;
     private List<Player> playerList;
+    private long wealth;
+    private final long startWealth;
+
 //    private List<Market> markets;
 //    private List<Bank> loans;
 //    public int temporaryTicketCost = 60;
@@ -64,9 +65,9 @@ public class Team {
         return playerList;
     }
 
-    public static void setLeague(League league) {
-        Team.league = league;
-    }
+//    public static void setLeague(League league) {
+//        Team.league = league;
+//    }
 
     public String getName() {
         return name;
