@@ -5,7 +5,7 @@ import org.sargassov.example.models.Coach;
 public class Manager {
     private String name;
 
-    public void setName(String name) {
+    public Manager(String name) {
         this.name = name;
     }
 

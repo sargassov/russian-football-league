@@ -6,22 +6,27 @@ import java.util.List;
 
 public class Stadium {
 
-    private String title;
-    private Integer fullCapacity;
-    private Integer vipCapacity;
-    private Integer vipTicketCost;
-    private Integer familyCapacity;
-    private Integer familyTicketCost;
-    private Integer fanCapacity;
-    private Integer fanTicketCost;
-    private Integer simpleCapacity;
-    private Integer simpleTicketCost;
-    private Integer awayCapacity;
-    private Integer awayTicketCost;
-    private Integer usualAverageCapacity;
-    private double stadiumExpenses;
     List<Integer> tempCapacityArr;
     List<Integer> tempCostArr;
+
+    private League league;
+    private String title;
+
+    private int fullCapacity;
+    private int vipCapacity;
+    private int vipTicketCost;
+    private int familyCapacity;
+    private int familyTicketCost;
+    private int fanCapacity;
+    private int fanTicketCost;
+    private int simpleCapacity;
+    private int simpleTicketCost;
+    private int awayCapacity;
+    private int awayTicketCost;
+    private int usualAverageCapacity;
+//    private int capacityStad;
+    private double stadiumExpenses;
+
 
     public Stadium(String title, int fullCapacity){
         this.fullCapacity = fullCapacity;
@@ -42,27 +47,59 @@ public class Stadium {
         awayTicketCost = 0;
         familyTicketCost = 0;
 
+        capacityAndCostArraysCreator();
+    }
+
+    private void capacityAndCostArraysCreator(){
         tempCapacityArr = new ArrayList<>(Arrays.asList(simpleCapacity, familyCapacity,
                 fanCapacity, awayCapacity, vipCapacity));
+
         tempCostArr = new ArrayList<>(Arrays.asList(simpleTicketCost, familyTicketCost,
                 fanTicketCost, awayTicketCost, vipTicketCost));
-
     }
 
     public int allTicketCost(){
-        int[] allcost = {
+
+        List<Integer> allcost = new ArrayList<>(Arrays.asList(
                 simpleTicketCost * simpleCapacity,
                 vipTicketCost * vipCapacity,
                 fanTicketCost * fanCapacity,
                 awayTicketCost * awayCapacity,
-                familyTicketCost * familyCapacity
-        };
+                familyTicketCost * familyCapacity));
 
         int result = 0;
         for(int a: allcost){
             result += a;
         }
         return result;
+    }
+
+
+
+    public double matchTicketRevenueAmount() { // тот же метод что и allTicketCost только делить на миллион
+        double ticketAmount = 0.0;
+
+        for(int i = 0; i < tempCapacityArr.size(); i++){
+            ticketAmount += tempCapacityArr.get(i) * tempCostArr.get(i);
+        }
+
+        return ticketAmount / 1000000;
+    }
+
+    public int getFullSectorCapacity() {
+
+        int fullSectorCapacity = 0;
+
+        for(int i : tempCapacityArr){
+            fullSectorCapacity += i;
+        }
+
+        return fullSectorCapacity;
+    }
+
+    public int getFullNotSectorCapacity() {
+
+        return fullCapacity - getFullSectorCapacity();
     }
 
     public void setSimpleTicketCost(Integer simpleTicketCost) {
@@ -173,31 +210,5 @@ public class Stadium {
 
     public void setStadiumExpenses(double stadiumExpenses) {
         this.stadiumExpenses = stadiumExpenses;
-    }
-
-    public double matchTicketRevenueAmount() {
-        double ticketAmount = 0.0;
-
-        for(int i = 0; i < tempCapacityArr.size(); i++){
-            ticketAmount += tempCapacityArr.get(i) * tempCostArr.get(i);
-        }
-
-        return ticketAmount / 1000000;
-    }
-
-    public int getFullSectorCapacity() {
-
-        int fullSectorCapacity = 0;
-
-        for(Integer integer : tempCapacityArr){
-            fullSectorCapacity += integer;
-        }
-
-        return fullSectorCapacity;
-    }
-
-    public int getFullNotSectorCapacity() {
-
-        return fullCapacity - getFullSectorCapacity();
     }
 }

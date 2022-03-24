@@ -1,6 +1,7 @@
 package org.sargassov.example.models.players;
 
 import org.sargassov.example.Corrector;
+import org.sargassov.example.models.League;
 import org.sargassov.example.models.Team;
 
 import java.util.ArrayList;
@@ -15,8 +16,9 @@ public class Player {
     private Team team;
     private String teamName;
     private Position position;
-    private Integer strategyPlace = -100;
+    private League league;
 
+    private int strategyPlace;
     private int number;
     private int gkAble;
     private int defAble;
@@ -32,7 +34,7 @@ public class Player {
     private int price;
 
     private boolean isInjury;
-    private boolean is11Th;
+    private boolean firstEleven;
     private boolean isCapitan;
 
     private final static Integer youngPlayerBirthYear = 2004;
@@ -63,6 +65,7 @@ public class Player {
 
         youthabilities();
         price = takePrice();
+        strategyPlace = -100;
     }
 
     private void init(){
@@ -141,49 +144,16 @@ public class Player {
         forwAble = ables.get(3);
     }
 
-
     public void setTeam(Team team) {
         this.team = team;
     }
-
-
-
-
-
-
-
-
-
-
 
     private Position randomPosition() {
         int random = (int)(Math.random() * 4);
         return positions.get(random);
     }
 
-
-
-
-//    private Team selectTeam(String teamName) {
-//        for(Team t : rfpl.teams)
-//            if(t.name.equals(teamName)){
-//                return t;
-//            }
-//        return null;
-//    }
-
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public String getTeamName() {
-        return teamName;
-    }
-
-
-
-    public static Integer YouthNumberCorrector(ArrayList<Player>list){
+    public static int youthNumberCorrector(ArrayList<Player>list){
         ArrayList<Integer> numbers = new ArrayList<>();
         int x = 1;
         while(x < 100){
@@ -212,11 +182,6 @@ public class Player {
 //        else
 //            return Corrector.wordToCenter("", 4);
 //    }
-
-
-    public String getName() {
-        return name;
-    }
 
     public void setNewPower() {
         trainingBalance -= 100;
@@ -257,6 +222,58 @@ public class Player {
 
     public int getPrice() {
         return price;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public void setStrategyPlace(Integer strategyPlace) {
+        this.strategyPlace = strategyPlace;
+    }
+
+    public int getStrategyPlace() {
+        return strategyPlace;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public boolean isPlayerInjury() {
+        return isInjury;
+    }
+
+    public boolean isFirstEleven() {
+        return firstEleven;
+    }
+
+    public void setFirstEleven(boolean firstEleven) {
+        this.firstEleven = firstEleven;
+    }
+
+    public void setCapitan(boolean capitan) {
+        isCapitan = capitan;
+    }
+
+    public boolean isCapitan() {
+        return isCapitan;
     }
 }
 

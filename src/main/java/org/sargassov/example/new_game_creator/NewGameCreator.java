@@ -1,23 +1,21 @@
 package org.sargassov.example.new_game_creator;
 
 
+import org.sargassov.example.RussianLeague;
 import org.sargassov.example.models.League;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.sargassov.example.strategies.Strategy;
 
-public class NewGameCreator {
+public class NewGameCreator{
+    public League league;
 
-    private final League league;
-
-    public NewGameCreator(){
-        league = League.getInstance();
+    public NewGameCreator(League league){
+        this.league = league;
     }
 
 
-
-
     public void createGame(){
-
-        new OpenSource().unpack();
+        new OpenSource(league).unpack();
+        new Strategy().strategyRandomizer(league);
 
 //        Strategy.strategyCreator(rfpl);
 //        Strategy.autoStrategyCreator();

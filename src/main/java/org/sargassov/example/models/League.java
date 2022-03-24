@@ -1,6 +1,8 @@
 package org.sargassov.example.models;
 
 import lombok.Data;
+import org.sargassov.example.finance.Bank;
+import org.sargassov.example.finance.Sponsor;
 import org.sargassov.example.models.players.Player;
 import org.springframework.stereotype.Component;
 
@@ -9,35 +11,28 @@ import java.util.List;
 
 @Component
 @Data
-public class League {
-    private static String leagueName;
-    private static League instance;
+public abstract class League {
+    private String leagueName;
 
-    private static List<Sponsor> sponsorList;
-    private static List<Team> teamList;
-    private static List<Player> youthPool;
-    private static Team userTeam;
+    private List<Sponsor> sponsorList;
+    private List<Team> teamList;
+    private List<Bank> banks;
+    private List<Player> youthPool;
+    private Team userTeam;
 
-    private League() {
-
-    }
-
-    public static League getInstance(){
-        if(instance == null){
-            instance = new League();
-            leagueName = "Russian Premier League";
-            sponsorList = new ArrayList<>();
-            teamList = new ArrayList<>();
-            youthPool = new ArrayList<>();
-        }
-        return instance;
+    public League(String leagueName){
+        this.leagueName = leagueName;
+        sponsorList = new ArrayList<>();
+        teamList = new ArrayList<>();
+        youthPool = new ArrayList<>();
+        banks = new ArrayList<>();
     }
 
     public String getLeagueName() {
         return leagueName;
     }
 
-    public static List<Sponsor> getSponsorList() {
+    public List<Sponsor> getSponsorList() {
         return sponsorList;
     }
 
@@ -45,15 +40,33 @@ public class League {
         return userTeam;
     }
 
-    public static List<Team> getTeamList() {
+    public List<Team> getTeamList() {
         return teamList;
     }
 
-    public static void setTeamList(List<Team> teamList) {
-        League.teamList = teamList;
+    public void addToTeamList(Team t){
+        t.setLeague(this);
+        teamList.add(t);
     }
 
-    public static List<Player> getYouthPool() {
+    public void addToBankList(Bank b){
+        b.setLeague(this);
+        banks.add(b);
+    }
+
+    public void setTeamList(List<Team> teamList) {
+        this.teamList = teamList;
+    }
+
+    public List<Player> getYouthPool() {
         return youthPool;
+    }
+
+    public List<Bank> getBanks() {
+        return banks;
+    }
+
+    public void setBanks(List<Bank> banks) {
+        this.banks = banks;
     }
 }

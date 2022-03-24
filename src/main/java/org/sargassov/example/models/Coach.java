@@ -3,18 +3,21 @@ package org.sargassov.example.models;
 
 import org.sargassov.example.coaches.CoachProgram;
 import org.sargassov.example.coaches.LevelOfCoach;
+import org.sargassov.example.coaches.Manager;
 import org.sargassov.example.models.players.Player;
 import org.sargassov.example.models.players.Position;
 
-public class Coach {
+public class Coach extends Manager {
     protected String name;
     protected CoachProgram currentCoachProgram;
+    private League league;
 
     protected Player playerOnTrain;
     protected Position coachPosition;
     protected LevelOfCoach levelOfCoach;
 
     public Coach(Position position){
+        super("");
         coachPosition = position;
         currentCoachProgram = CoachProgram.STANDART;
     }

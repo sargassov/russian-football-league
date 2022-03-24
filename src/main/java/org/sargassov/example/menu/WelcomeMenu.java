@@ -2,6 +2,8 @@ package org.sargassov.example.menu;
 
 import lombok.SneakyThrows;
 import org.sargassov.example.Corrector;
+import org.sargassov.example.RussianLeague;
+import org.sargassov.example.models.League;
 import org.sargassov.example.new_game_creator.NewGameCreator;
 import org.sargassov.example.views.WelcomeView;
 
@@ -22,7 +24,10 @@ public class WelcomeMenu extends Menu{
         int select = 1;//Corrector.inputIntMethod(minimal, maximal);
 
         if(select == 0) System.exit(0);
-        else if(select == 1) new NewGameCreator().createGame();
+        else if(select == 1) {
+            League league = new RussianLeague();
+            new NewGameCreator(league).createGame();
+        }
         //else if(select == 2)
     }
 }
