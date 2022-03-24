@@ -1,4 +1,10 @@
 package org.sargassov.example.models.players;
 
-public enum Position {GOALKEEPER, DEFENDER, MIDFIELDER, FORWARD};
+public enum Position implements Cloneable {
+
+    GOALKEEPER, DEFENDER, MIDFIELDER, FORWARD
+
+};
+
+
 

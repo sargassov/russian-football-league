@@ -6,10 +6,11 @@ import org.sargassov.example.models.Team;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 
-public class Player {
+public class Player implements Cloneable{
 
     private String name;
     private String natio;
@@ -52,6 +53,7 @@ public class Player {
         trainingAble = (int) (Math.random() * 10 + 10);
         price = takePrice();
         power = findPower();
+        strategyPlace = -100;
 
     }
 
@@ -65,7 +67,7 @@ public class Player {
 
         youthabilities();
         price = takePrice();
-        strategyPlace = -100;
+
     }
 
     private void init(){
@@ -86,7 +88,7 @@ public class Player {
         yearBirth = Integer.parseInt(mass[1]);
         natio = mass[2];
         teamName = mass[3];
-        position = Corrector.stringInPos(mass[4]);;
+        position = Corrector.stringInPos(mass[4]);
         gkAble = Integer.parseInt(mass[5]);
         defAble = Integer.parseInt(mass[6]);
         midAble = Integer.parseInt(mass[7]);
@@ -274,6 +276,11 @@ public class Player {
 
     public boolean isCapitan() {
         return isCapitan;
+    }
+
+    @Override
+    public Player clone() throws CloneNotSupportedException {
+        return (Player)super.clone();
     }
 }
 

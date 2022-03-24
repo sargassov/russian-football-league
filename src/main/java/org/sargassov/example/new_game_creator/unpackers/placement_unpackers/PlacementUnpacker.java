@@ -1,4 +1,4 @@
-package org.sargassov.example.placements;
+package org.sargassov.example.new_game_creator.unpackers.placement_unpackers;
 
 import org.sargassov.example.Corrector;
 import org.sargassov.example.models.players.Position;

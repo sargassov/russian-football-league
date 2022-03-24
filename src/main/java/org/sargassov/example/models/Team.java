@@ -5,7 +5,6 @@ import org.sargassov.example.coaches.Manager;
 import org.sargassov.example.finance.Bank;
 import org.sargassov.example.finance.Sponsor;
 import org.sargassov.example.models.players.Player;
-import org.sargassov.example.placements.PlacementUnpacker;
 import org.sargassov.example.strategies.Placement;
 
 import java.util.ArrayList;
