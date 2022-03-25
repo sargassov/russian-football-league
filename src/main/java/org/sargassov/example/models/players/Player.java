@@ -4,10 +4,8 @@ import org.sargassov.example.Corrector;
 import org.sargassov.example.models.League;
 import org.sargassov.example.models.Team;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Player implements Cloneable{
@@ -155,25 +153,41 @@ public class Player implements Cloneable{
         return positions.get(random);
     }
 
-    public static int youthNumberCorrector(ArrayList<Player>list){
-        ArrayList<Integer> numbers = new ArrayList<>();
-        int x = 1;
-        while(x < 100){
-            boolean marker = false;
-            for(Player player : list){
-                if(player.number == x){
-                    marker = true;
-                    break;
-                }
-            }
-            if(!marker){
-                numbers.add(x);
-            }
-             x++;
-        }
-        int num = (int) (Math.random() * numbers.size() - 1);
-        num++;
-        return numbers.get(num);
+    private void numberCorrector(List<Player>playerList){
+        Random random = new Random();
+        List<Integer> numbers = playerList.stream()
+                .map(p -> p.getNumber())
+                .sorted()
+                .collect(Collectors.toList());
+
+        int x = 0;
+
+        do{
+            x = random.nextInt(99) + 1;
+        }while(numbers.contains(x));
+        number = x;
+
+
+
+
+
+//        int x = 1;
+//        while(x < 100){
+//            boolean marker = false;
+//            for(Player player : playerList){
+//                if(player.number == x){
+//                    marker = true;
+//                    break;
+//                }
+//            }
+//            if(!marker){
+//                numbers.add(x);
+//            }
+//             x++;
+//        }
+//        int num = (int) (Math.random() * numbers.size() - 1);
+//        num++;
+//        return numbers.get(num);
     }
 
 //    public String strategyPlaceInPosition(){
@@ -276,6 +290,30 @@ public class Player implements Cloneable{
 
     public boolean isCapitan() {
         return isCapitan;
+    }
+
+    public static List<Position> getPositions() {
+        return positions;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void getNumberCorrector(List<Player> playerList){
+        numberCorrector(playerList);
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public League getLeague() {
+        return league;
+    }
+
+    public void setLeague(League league) {
+        this.league = league;
     }
 
     @Override

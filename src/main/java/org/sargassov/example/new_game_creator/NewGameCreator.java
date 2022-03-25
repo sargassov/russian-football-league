@@ -1,9 +1,11 @@
 package org.sargassov.example.new_game_creator;
 
 
-import org.sargassov.example.RussianLeague;
+import org.sargassov.example.menu.EnterMenu;
 import org.sargassov.example.models.League;
+import org.sargassov.example.models.YouthAcademy;
 import org.sargassov.example.strategies.Strategy;
+import org.sargassov.example.time.calendar_creators.FootballCalendar;
 
 public class NewGameCreator{
     public League league;
@@ -17,13 +19,9 @@ public class NewGameCreator{
         new OpenSource(league).unpack();
         new Strategy().strategyRandomizer(league);
 
-//        Strategy.strategyCreator(rfpl);
-//        Strategy.autoStrategyCreator();
-//        Strategy.capitanDeterminer();
-//        Strategy.powerTeamCounter();
-//        MenuClass.newGameMenu(rfpl);
-//        YouthAcademy.youthAcademyPlayersAdd(rfpl);
-//        FootballCalendar.sheduleCreator(rfpl);
+        new EnterMenu().init(league).start();
+        YouthAcademy.youthAcademyRecruitment(league);
+        FootballCalendar.calendarCreator(league);
 //        FootballCalendar.editCalendar();
 //        Interface.createInterfaces(rfpl);
 //        Interface.readCoachInterface();

@@ -4,6 +4,8 @@ import lombok.Data;
 import org.sargassov.example.finance.Bank;
 import org.sargassov.example.finance.Sponsor;
 import org.sargassov.example.models.players.Player;
+import org.sargassov.example.time.days.Day;
+import org.sargassov.example.time.days.Tour;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,13 +16,15 @@ import java.util.List;
 public abstract class League {
     private String leagueName;
 
+    private List<List<Day>> calendar;
+    private List<Tour> allTourDates;
     private List<Sponsor> sponsorList;
     private List<Team> teamList;
     private List<Bank> banks;
     private List<Player> youthPool;
     private Team userTeam;
 
-    public League(String leagueName){
+    public League(String leagueName) {
         this.leagueName = leagueName;
         sponsorList = new ArrayList<>();
         teamList = new ArrayList<>();
@@ -44,12 +48,12 @@ public abstract class League {
         return teamList;
     }
 
-    public void addToTeamList(Team t){
+    public void addToTeamList(Team t) {
         t.setLeague(this);
         teamList.add(t);
     }
 
-    public void addToBankList(Bank b){
+    public void addToBankList(Bank b) {
         b.setLeague(this);
         banks.add(b);
     }
@@ -68,5 +72,21 @@ public abstract class League {
 
     public void setBanks(List<Bank> banks) {
         this.banks = banks;
+    }
+
+    public List<List<Day>> getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(List<List<Day>> calendar) {
+        this.calendar = calendar;
+    }
+
+    public List<Tour> getAllTourDates() {
+        return allTourDates;
+    }
+
+    public void setAllTourDates(List<Tour> allTourDates) {
+        this.allTourDates = allTourDates;
     }
 }

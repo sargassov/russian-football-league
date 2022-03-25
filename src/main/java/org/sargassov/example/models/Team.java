@@ -70,6 +70,13 @@ public class Team {
         return playerList;
     }
 
+    public void addToPlayerList(Player player){
+        player.setTeam(this);
+        player.setLeague(league);
+        player.getNumberCorrector(playerList);
+        playerList.add(player);
+    }
+
 //    public static void setLeague(League league) {
 //        Team.league = league;
 //    }
@@ -156,5 +163,21 @@ public class Team {
 
     public void setTeamPower(int teamPower) {
         this.teamPower = teamPower;
+    }
+
+    public List<Manager> getCoaches() {
+        return coaches;
+    }
+
+    public void setCoaches(List<Manager> coaches) {
+        this.coaches = coaches;
+    }
+
+    public League getLeague() {
+        return league;
+    }
+
+    public Stadium getStadium() {
+        return stadium;
     }
 }

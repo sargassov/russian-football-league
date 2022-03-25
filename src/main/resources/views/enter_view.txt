@@ -1,0 +1,27 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+PLEASE WELCOME!!!
+
+Enter your name:
+
+Enter your lastname:
+
+
+1. ||Ahmat||
+2. ||Arsenal||
+3. ||CSKA||
+4. ||Dinamo||
+5. ||CSKA||
+6. ||Krasnodar||
+7. ||Krylia Sovetov||
+8. ||Lokomotiv||
+9. ||Orenburg||
+10. ||Rostov||
+11. ||Rubin||
+12. ||Sochi||
+13. ||Tambov||
+14. ||Ufa||
+15. ||Ural||
+16. ||Zenit||
+
+
+Enter a number of favourite team (from 1 to 16):
