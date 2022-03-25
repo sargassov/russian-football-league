@@ -1,32 +1,27 @@
 package org.sargassov.example.new_game_creator;
 
 
+import org.sargassov.example.menu.EnterMenu;
 import org.sargassov.example.models.League;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.sargassov.example.models.YouthAcademy;
+import org.sargassov.example.strategies.Strategy;
+import org.sargassov.example.time.calendar_creators.FootballCalendar;
 
-public class NewGameCreator {
+public class NewGameCreator{
+    public League league;
 
-    private final League league;
-
-    public NewGameCreator(){
-        league = new League();
+    public NewGameCreator(League league){
+        this.league = league;
     }
 
 
-
-
     public void createGame(){
+        new OpenSource(league).unpack();
+        new Strategy().strategyRandomizer(league);
 
-        setLeague();
-        new OpenSource().unpack();
-
-//        Strategy.strategyCreator(rfpl);
-//        Strategy.autoStrategyCreator();
-//        Strategy.capitanDeterminer();
-//        Strategy.powerTeamCounter();
-//        MenuClass.newGameMenu(rfpl);
-//        YouthAcademy.youthAcademyPlayersAdd(rfpl);
-//        FootballCalendar.sheduleCreator(rfpl);
+        new EnterMenu().init(league).start();
+        YouthAcademy.youthAcademyRecruitment(league);
+        FootballCalendar.calendarCreator(league);
 //        FootballCalendar.editCalendar();
 //        Interface.createInterfaces(rfpl);
 //        Interface.readCoachInterface();
@@ -34,9 +29,4 @@ public class NewGameCreator {
 //
 //        MenuClass.gameMenu();
     }
-
-    private void setLeague() {
-        Unpacker.league = league;
-    }
-
 }

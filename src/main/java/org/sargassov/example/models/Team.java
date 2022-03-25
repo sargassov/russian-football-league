@@ -1,85 +1,92 @@
 package org.sargassov.example.models;
 
 
+import org.sargassov.example.coaches.Manager;
+import org.sargassov.example.finance.Bank;
+import org.sargassov.example.finance.Sponsor;
+import org.sargassov.example.models.players.Player;
+import org.sargassov.example.strategies.Placement;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
 public class Team {
-    private static League league;
+    private League league;
     private String name;
     private String homeTown;
     private Stadium stadium;
-    private long wealth;
-    private final long startWealth;
-    private List<Coach> coaches;
+    private Sponsor sponsor;
+    private Placement placement;
+
+    private List<Manager> coaches;
     private List<Player> playerList;
+    private List<Bank> loans;
 //    private List<Market> markets;
-//    private List<Bank> loans;
-//    public int temporaryTicketCost = 60;
-//    public int regularCapacity;
-//
-//
-//
-//    public final long startWealth;
-//    public long transferExpenses;
-//    public long personalExpenses;
-//    public long marketExpenses;
-//    public long stadiumExpenses;
-//
-//    public Strategy strategy = new Strategy();
 //    public ArrayList<String> coachInterface;
-//    public Sponsor sponsor;
-//    public int maxValueOfLoans = 5;
-//    public boolean changeSponsor = false;
-//
-//    private Random random;
-//
-//
+
+    private final long startWealth;
+    public final int maxValueOfLoans;
+    private int regularCapacity;
+    private int temporaryTicketCost;
+    private int teamPower;
+    private long wealth;
+    private long transferExpenses;
+    private long personalExpenses;
+    private long marketExpenses;
+    private long stadiumExpenses;
+//    private boolean changeSponsor = false;
+
     public Team(String info) {
+        //        markets = new ArrayList<>();
+        coaches = new ArrayList<>();
+        playerList = new ArrayList<>();
+        loans = new ArrayList<>();
 
         String[] teamInfo = info.split("/");
 
         name = teamInfo[0];
         homeTown = teamInfo[1];
         stadium = new Stadium(teamInfo[2], Integer.parseInt(teamInfo[4]));
+        if(coaches.size() == 0) {coaches.add(new Manager(teamInfo[3]));}
 
-//        if(coaches.size() == 0) {coaches.add(new Manager(teamInfo[3]));}
-//        Manager manager = new Manager(teamInfo[3]);
-
-        wealth = Integer.parseInt(teamInfo[5]) * 1_000_000;
+        wealth = Long.parseLong(teamInfo[5]) * 1_000_000;
         startWealth = wealth;
-//        markets = new ArrayList<>();
-        coaches = new ArrayList<>();
-        playerList = new ArrayList<>();
-//        loans = new ArrayList<>();
-
-//        addToSponsor();
+        temporaryTicketCost = 60;
+        maxValueOfLoans = 5;
 
     }
+
+    private void addToSponsor() {
+        Random random = new Random();
+        sponsor = league.getSponsorList().get(random.nextInt(16));
+        wealth += sponsor.getContractBonusWage();
+//        regularCapacity = capacityStad / 4;
+        System.out.println(name + " " + sponsor.getName());
+    }
+
 
     public List<Player> getPlayerList() {
         return playerList;
     }
 
-    public static void setLeague(League league) {
-        Team.league = league;
+    public void addToPlayerList(Player player){
+        player.setTeam(this);
+        player.setLeague(league);
+        player.getNumberCorrector(playerList);
+        playerList.add(player);
     }
+
+//    public static void setLeague(League league) {
+//        Team.league = league;
+//    }
 
     public String getName() {
         return name;
     }
 
     //
-//    private void addToSponsor() {
-//
-//        random = new Random();
-//        sponsor = rfpl.sponsorList.get(random.nextInt(16));
-//        wealth += sponsor.getContractBonusWage();
-//        regularCapacity = capacityStad / 4;
-//        System.out.println(name + " " + sponsor.getName());
-//    }
+
 //
 //    public void breakSponsorContract(){
 //        wealth -= sponsor.getContractBonusWage();
@@ -120,39 +127,57 @@ public class Team {
 //        return wins * 3 + draws;
 //    }
 //
-//    @Override
-//    public String toString() {
-//        return "Team{" +
-//                "name='" + name + '\'' +
-//                ", town='" + town + '\'' +
-//                ", stadium=" + stadium +
-//                ", games=" + games +
-//                ", wins=" + wins +
-//                ", draws=" + draws +
-//                ", defeats=" + defeats +
-//                ", goalScored=" + goalScored +
-//                ", goalMissed=" + goalMissed +
-//                ", teamPower=" + teamPower +
-//                ", capacityStad=" + capacityStad +
-//                ", temporaryTicketCost=" + temporaryTicketCost +
-//                ", regularCapacity=" + regularCapacity +
-//                ", coaches=" + coaches +
-//                ", loans=" + loans +
-//                ", wealth=" + wealth +
-//                ", startWealth=" + startWealth +
-//                ", transferExpenses=" + transferExpenses +
-//                ", personalExpenses=" + personalExpenses +
-//                ", marketExpenses=" + marketExpenses +
-//                ", stadiumExpenses=" + stadiumExpenses +
-//                ", playerList=" + playerList +
-//                ", strategy=" + strategy +
-//                ", coachInterface=" + coachInterface +
-//                ", sponsor=" + sponsor +
-//                ", maxValueOfLoans=" + maxValueOfLoans +
-//                ", changeSponsor=" + changeSponsor +
-//                ", rfpl=" + rfpl +
-//                ", random=" + random +
-//                ", markets=" + markets +
-//                '}';
-//    }
+
+    public long getWealth() {
+        return wealth;
+    }
+
+    public void setWealth(long wealth) {
+        this.wealth = wealth;
+    }
+
+    public List<Bank> getLoans() {
+        return loans;
+    }
+
+
+    public void selectSponsor() {
+        addToSponsor();
+    }
+
+    public void setLeague(League league) {
+        this.league = league;
+    }
+
+    public void setPlacement(Placement placement) {
+        this.placement = placement;
+    }
+
+    public Placement getPlacement() {
+        return placement;
+    }
+
+    public int getTeamPower() {
+        return teamPower;
+    }
+
+    public void setTeamPower(int teamPower) {
+        this.teamPower = teamPower;
+    }
+
+    public List<Manager> getCoaches() {
+        return coaches;
+    }
+
+    public void setCoaches(List<Manager> coaches) {
+        this.coaches = coaches;
+    }
+
+    public League getLeague() {
+        return league;
+    }
+
+    public Stadium getStadium() {
+        return stadium;
+    }
 }

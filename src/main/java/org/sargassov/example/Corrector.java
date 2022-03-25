@@ -1,24 +1,23 @@
 package org.sargassov.example;
 
 
-import org.sargassov.example.models.Position;
+import org.sargassov.example.models.League;
+import org.sargassov.example.models.Team;
+import org.sargassov.example.models.players.Position;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Corrector {
+    private static Scanner scanner = new Scanner(System.in);
+
     public static int inputIntMethod(int minimal, int maximal){
-        Scanner sc = new Scanner(System.in);
         int number;
         do {
-            while (!sc.hasNextInt()) {
+            while (!scanner.hasNextInt()) {
                 System.out.println("\n\n\t\t\t\tYou weren't entered a number! Try again!\n\n");
-                sc.next();
+                scanner.next();
             }
-            number = sc.nextInt();
+            number = scanner.nextInt();
             if(number < minimal || number > maximal){
                 System.out.println("\n\n\t\t\t\tThe choise is out of the range between " + minimal + " and " + maximal + ". Try again!");
                 continue;
@@ -41,6 +40,27 @@ public class Corrector {
         else if(str.equals("Mid")) return Position.MIDFIELDER;
         else return Position.FORWARD;
 
+    }
+
+    public static String inputStringMethod() {
+        String line, temp;
+        temp = scanner.nextLine();
+        while(!isTheString(temp) || temp.equals("")) {
+            System.out.println("\n\n\t\t\t\tYou were written an incorrect line. Try again!\n\n");
+            temp = scanner.next();
+        }
+        line = temp;
+        return line;
+    }
+
+    public static boolean isTheString(String tech){
+        for(int x = 0; x < tech.length(); x++){
+            int interval = (int)(tech.toCharArray()[x]);
+            if ((interval != 32 && interval < 65) || (interval > 90 && interval < 97) || (interval > 122)){
+                return false;
+            }
+        }
+        return true;
     }
 
 //    public static <T> void notNullChecking(T obj){
@@ -75,17 +95,7 @@ public class Corrector {
 //    }
 //
 //
-//    public static String InputStringMethod() {
-//        Scanner sc = new Scanner(System.in);
-//        String line, temp;
-//        temp = sc.nextLine();
-//        while(!isTheString(temp) || temp.equals("")) {
-//            System.out.println("\n\n\t\t\t\tYou were written an incorrect line. Try again!\n\n");
-//            temp = sc.next();
-//        }
-//        line = temp;
-//        return line;
-//    }
+//
 //
 //    public static int indexOfArrayTeam(Team[] array, Team t){
 //        for (int i = 0; i < array.length; i++) {
@@ -252,16 +262,7 @@ public class Corrector {
 //        return newWord;
 //    }
 //
-//    public static boolean isTheString(String tech){
-//        //int interval;
-//        for(int x = 0; x < tech.length(); x++){
-//            int interval = (int)(tech.toCharArray()[x]);
-//            if ((interval != 32 && interval < 65) || (interval > 90 && interval < 97) || (interval > 122)){
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+//
 //
 //    public static String wordToCenter(String tech, int longWord){
 //        int longCurrentWord = tech.length();

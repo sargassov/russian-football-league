@@ -1,7 +1,11 @@
-package org.sargassov.example.models;
+package org.sargassov.example.finance;
+
+import org.sargassov.example.models.League;
 
 public class Sponsor {
+
     private String name;
+
     private long dayWage;
     private long matchWage;
     private long goalBonusWage;
