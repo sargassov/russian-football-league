@@ -12,7 +12,7 @@ public class BankUnpack extends Unpacker{
     }
 
     @Override
-    public void readAndUnpack() {
+    public void read() {
         dataList.forEach(s -> league.addToBankList(new Bank(s)));
         //============================================================//
         System.out.println("banks = " + league.getBanks().size());

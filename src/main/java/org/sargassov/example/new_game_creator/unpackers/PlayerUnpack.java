@@ -16,7 +16,7 @@ public class PlayerUnpack extends Unpacker{
     }
 
     @Override
-    public void readAndUnpack() {
+    public void read() {
 
         for (String s : dataList) {
 

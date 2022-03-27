@@ -10,7 +10,6 @@ public class YouthAcademy {
 
     public static void youthAcademyRecruitment(League league) {
         league.getTeamList().stream()
-                .filter(t -> !t.getName().equals(league.getUserTeam().getName()))
                 .forEach(YouthAcademy::fantasyDraft);
     }
 

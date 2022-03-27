@@ -22,11 +22,11 @@ public class SixteenTeamsShedulerUnpacker extends Unpacker implements TeamShedul
             tours = 30;
             matchesInTour = 8;
         }
-        readAndUnpack();
+        read();
     }
 
     @Override
-    public void readAndUnpack() {
+    public void read() {
 
         for(int x = 0; x < tours; x++){
 

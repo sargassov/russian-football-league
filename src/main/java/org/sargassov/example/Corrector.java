@@ -63,6 +63,35 @@ public class Corrector {
         return true;
     }
 
+    public static String wordToCenter(String tech, int longWord){
+        int longCurrentWord = tech.length();
+        for(int x = 0; x < longWord - longCurrentWord; x++){
+            if(x % 2 == 0) tech = " " + tech;
+            else tech += " ";
+        }
+        return tech;
+    }
+
+    public static String stringStapler(String[] mass){
+        StringBuilder answer = new StringBuilder("");
+        for(String s: mass){
+            answer.append(s + "|");
+        }
+        return answer.toString();
+    }
+
+    public static String priceInMillion(long l) {
+        String subStr = "" + l;
+        if(l == 0) return  "0.00";
+        else if (l < 1_000_000){
+            return  "0." + ("" + l).substring(0, 2);
+        }
+        subStr = subStr.substring(0, subStr.length() - 4);
+        subStr = (subStr.substring(0, subStr.length() - 2) + "." + subStr.substring(subStr.length() - 2));
+        return subStr;
+    }
+
+
 //    public static <T> void notNullChecking(T obj){
 //        try{
 //            if(obj == null){
@@ -242,16 +271,7 @@ public class Corrector {
 //        return subStr;
 //    }
 //
-//    public static String priceInMillion(long l) {
-//        String subStr = "" + l;
-//        if(l == 0) return  "0.00";
-//        else if (l < 1_000_000){
-//            return  "0." + ("" + l).substring(0, 2);
-//        }
-//        subStr = subStr.substring(0, subStr.length() - 4);
-//        subStr = (subStr.substring(0, subStr.length() - 2) + "." + subStr.substring(subStr.length() - 2));
-//        return subStr;
-//    }
+//
 //
 //    public static String Inspacer4Sym(String word){
 //        int len = 4 - word.length();
@@ -301,11 +321,5 @@ public class Corrector {
 //        return listMonth.get(month);
 //    }
 //
-//    public static String stringStapler(String[] mass){
-//        StringBuilder answer = new StringBuilder("");
-//        for(String s: mass){
-//            answer.append(s + "|");
-//        }
-//        return answer.toString();
-//    }
+//
 }

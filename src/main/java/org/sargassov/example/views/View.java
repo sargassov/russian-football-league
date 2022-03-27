@@ -15,7 +15,7 @@ public abstract class View {
     protected List<String> viewList;
 
     @SneakyThrows
-    protected View(String string){
+    public View(String string){
         this.filePath = string;
         Path path = Paths.get(filePath);
 
@@ -24,6 +24,7 @@ public abstract class View {
             throw new NullPointerException("Empty argument in construcnor " + this.getClass().getName());
 
         viewList = Files.readAllLines(path, StandardCharsets.UTF_8);
+//        for(int x = 0; x < viewList.size(); x++) System.out.println(viewList.get(x));
     }
 
     public abstract void print();

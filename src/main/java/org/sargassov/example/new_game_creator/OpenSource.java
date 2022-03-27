@@ -22,6 +22,6 @@ public class OpenSource {
     }
 
     public void unpack(){
-        unpackers.forEach(Unpacker::readAndUnpack);
+        unpackers.forEach(Unpacker::read);
     }
 }

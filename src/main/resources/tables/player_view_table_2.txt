@@ -1,0 +1,24 @@
+SORTING:
+
+==> 1. Sort by name
+==> 2. Sort by nationality
+==> 3. Sort by number
+==> 4. Sort by player position
+==> 5. Sort by goalkeeper ability
+==> 6. Sort by defender ability
+==> 7. Sort by midfielder ability
+==> 8. Sort by forward ability
+==>  9. Sort by captain ability
+==> 10. Sort by injuries
+==> 11. Sort by time training abilities
+==> 12. Sort by year of birth
+==> 13. Sort by position in the team
+==> 14. Sort by power
+==> 15. Sort by tire
+==> 16. Sort by time before treatment
+==> 17. Sort by price
+==> 18. Sort by club
+
+PLAYER:
+
+==> 19. Player menu:

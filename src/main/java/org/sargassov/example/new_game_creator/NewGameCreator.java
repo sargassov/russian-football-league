@@ -2,6 +2,7 @@ package org.sargassov.example.new_game_creator;
 
 
 import org.sargassov.example.menu.EnterMenu;
+import org.sargassov.example.menu.MainMenu;
 import org.sargassov.example.models.League;
 import org.sargassov.example.models.YouthAcademy;
 import org.sargassov.example.strategies.Strategy;
@@ -19,9 +20,10 @@ public class NewGameCreator{
         new OpenSource(league).unpack();
         new Strategy().strategyRandomizer(league);
 
-        new EnterMenu().init(league).start();
+        new EnterMenu().start();
         YouthAcademy.youthAcademyRecruitment(league);
         FootballCalendar.calendarCreator(league);
+        new MainMenu().start();
 //        FootballCalendar.editCalendar();
 //        Interface.createInterfaces(rfpl);
 //        Interface.readCoachInterface();

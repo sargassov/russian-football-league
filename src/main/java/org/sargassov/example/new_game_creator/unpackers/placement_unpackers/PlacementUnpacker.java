@@ -20,7 +20,7 @@ public abstract class PlacementUnpacker extends Unpacker {
     }
 
     @Override
-    public void readAndUnpack() {
+    public void read() {
         int posNumber = 0;
 
         while (posNumber < roleValue){
