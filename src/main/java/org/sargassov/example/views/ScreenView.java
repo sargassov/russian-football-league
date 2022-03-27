@@ -3,8 +3,8 @@ import org.sargassov.example.views.View;
 
 import static java.lang.System.out;
 
-public class WelcomeView extends View {
-    public WelcomeView(String string) {
+public class ScreenView extends View {
+    public ScreenView(String string) {
         super(string);
     }
 

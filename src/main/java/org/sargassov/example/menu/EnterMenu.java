@@ -1,32 +1,22 @@
 package org.sargassov.example.menu;
 
 import lombok.SneakyThrows;
-import org.sargassov.example.Corrector;
-import org.sargassov.example.RussianLeague;
+import org.sargassov.example.Game;
 import org.sargassov.example.coaches.Manager;
+import org.sargassov.example.menu.main_menu.MenuInterface;
 import org.sargassov.example.models.League;
 import org.sargassov.example.models.Team;
-import org.sargassov.example.new_game_creator.NewGameCreator;
 import org.sargassov.example.views.EnterView;
-import org.sargassov.example.views.WelcomeView;
 
-import java.util.Scanner;
-
-public class EnterMenu extends Menu{
+public class EnterMenu extends Menu implements MenuInterface {
 
     private static final String enterViewAddress = "src\\main\\resources\\views\\enter_view.txt";
-    private static League league;
 
     public EnterMenu() {
         menuAddress = enterViewAddress;
         view = new EnterView(menuAddress);
         minimal = 1;
         maximal = 16;
-    }
-
-    public EnterMenu init(League league){
-        EnterMenu.league = league;
-        return this;
     }
 
     @SneakyThrows
@@ -40,24 +30,13 @@ public class EnterMenu extends Menu{
         view.print();
         lastName = "Giovanni";//Corrector.inputStringMethod();
         lastName = lastName.concat(" ").concat(name);
+        Game.setUserName(lastName);
 
         EnterView.setInterval(26);
         view.print();
-        Team userTeam = league.getTeamList().get(5);//Corrector.inputIntMethod(minimal, maximal) - 1);
+        Team userTeam = league.getTeamList().get(2);//Corrector.inputIntMethod(minimal, maximal) - 1);
         userTeam.getCoaches().set(0, new Manager(lastName));
-
+        setUserTeam(userTeam);
         league.setUserTeam(userTeam);
     }
-
-//    public static void gameMenu(){
-//        new MainMenuTable(rfpl.interfaces.get(0).fields).toPrint(rfpl);
-//        int choise = Corrector.inputIntMethod(0, 9);
-//        rfpl.userInterfaces.get(choise).Do(rfpl);
-//    }
-//
-//
-//    @Override
-//    public void start() {
-//
-//    }
 }

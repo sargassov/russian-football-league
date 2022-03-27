@@ -15,7 +15,7 @@ public class TeamUnpack extends Unpacker{
     }
 
     @Override
-    public void readAndUnpack() {
+    public void read() {
 
         dataList.forEach(s -> league.addToTeamList(new Team(s)));
         league.getTeamList().forEach(Team::selectSponsor);

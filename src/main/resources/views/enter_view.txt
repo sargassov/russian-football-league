@@ -10,14 +10,14 @@ Enter your lastname:
 2. ||Arsenal||
 3. ||CSKA||
 4. ||Dinamo||
-5. ||CSKA||
-6. ||Krasnodar||
-7. ||Krylia Sovetov||
-8. ||Lokomotiv||
-9. ||Orenburg||
-10. ||Rostov||
-11. ||Rubin||
-12. ||Sochi||
+5. ||Krasnodar||
+6. ||Krylia Sovetov||
+7. ||Lokomotiv||
+8. ||Orenburg||
+9. ||Rostov||
+10. ||Rubin||
+11. ||Sochi||
+12. ||Spartak||
 13. ||Tambov||
 14. ||Ufa||
 15. ||Ural||

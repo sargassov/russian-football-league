@@ -70,7 +70,7 @@ public class Player implements Cloneable{
 
     private void init(){
         if(priceSetter == null){
-            priceSetter = new PlayerPriceSetter();
+            priceSetter = PlayerPriceSetter.getInstance();
         }
         if(positions == null){
             positions = Arrays.asList(Position.GOALKEEPER, Position.DEFENDER,
@@ -190,14 +190,14 @@ public class Player implements Cloneable{
 //        return numbers.get(num);
     }
 
-//    public String strategyPlaceInPosition(){
-//        if(strategyPlace > -1 && strategyPlace < 12)
-//            return Corrector.wordToCenter(Corrector.posInString(position), 4);
-//        else if(strategyPlace < 19)
-//            return Corrector.wordToCenter("Sub", 4);
-//        else
-//            return Corrector.wordToCenter("", 4);
-//    }
+    public String strategyPlaceInPosition(){
+        if(strategyPlace > -1 && strategyPlace < 12)
+            return Corrector.wordToCenter(Corrector.posInString(position), 4);
+        else if(strategyPlace < 19)
+            return Corrector.wordToCenter("Sub", 4);
+        else
+            return Corrector.wordToCenter("", 4);
+    }
 
     public void setNewPower() {
         trainingBalance -= 100;
@@ -316,9 +316,25 @@ public class Player implements Cloneable{
         this.league = league;
     }
 
+    public int getTrainingAble() {
+        return trainingAble;
+    }
+
+    public String getNatio() {
+        return natio;
+    }
+
+    public int getTimeBeforeTreat() {
+        return timeBeforeTreat;
+    }
+
     @Override
     public Player clone() throws CloneNotSupportedException {
         return (Player)super.clone();
+    }
+
+    public int getTire() {
+        return tire;
     }
 }
 

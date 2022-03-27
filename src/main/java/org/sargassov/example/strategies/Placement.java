@@ -13,7 +13,7 @@ public class Placement {
 
     @SneakyThrows
     public Placement(PlacementUnpacker placementUnpacker) {
-        placementUnpacker.readAndUnpack();
+        placementUnpacker.read();
         description = placementUnpacker.getDescription();
         roleList = new ArrayList<>(18);
 

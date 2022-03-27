@@ -40,10 +40,6 @@ public abstract class League {
         return sponsorList;
     }
 
-    public Team getUserTeam() {
-        return userTeam;
-    }
-
     public List<Team> getTeamList() {
         return teamList;
     }

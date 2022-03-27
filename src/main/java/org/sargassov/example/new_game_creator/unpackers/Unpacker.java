@@ -26,9 +26,10 @@ public abstract class Unpacker{
                     + " in the class " + this.getClass().getName());
 
         dataList = Files.readAllLines(path, StandardCharsets.UTF_8);
+        System.out.println("dataList size = " + dataList.size());
     }
 
-    public abstract void readAndUnpack();
+    public abstract void read();
 
     public static void setLeague(League league) {
         Unpacker.league = league;

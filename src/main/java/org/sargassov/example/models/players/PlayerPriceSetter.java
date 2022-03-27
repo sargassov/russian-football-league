@@ -14,15 +14,21 @@ public class PlayerPriceSetter {
         }
     }
 
-    private final double[] priceCoeff = {0.01, 1.0, 2.5, 7.0, 34.0};
-    private final double[] mltpyCoeff = {0.01, 0.15, 0.45, 2.7, 6.5};
-    private final double[] captainCoeff = {1.1, 1.15, 1.2, 1.25, 1.3};
-    List<Position> positions;
-    List<Integer> ables;
+    private static final double[] priceCoeff = {0.01, 1.0, 2.5, 7.0, 34.0};
+    private static final double[] mltpyCoeff = {0.01, 0.15, 0.45, 2.7, 6.5};
+    private static final double[] captainCoeff = {1.1, 1.15, 1.2, 1.25, 1.3};
+    private static List<Position> positions;
+    private List<Integer> ables;
+    private static PlayerPriceSetter instance;
 
-    public PlayerPriceSetter() {
-        this.positions = Arrays.asList(Position.GOALKEEPER, Position.DEFENDER,
-                Position.MIDFIELDER, Position.FORWARD);
+    private PlayerPriceSetter() {}
+
+    public static PlayerPriceSetter getInstance() {
+        if(instance == null){
+            instance = new PlayerPriceSetter();
+            positions = Player.getPositions();
+        }
+        return instance;
     }
 
     public int createPrice(Player player){
