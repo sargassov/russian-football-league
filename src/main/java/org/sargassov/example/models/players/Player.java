@@ -70,7 +70,7 @@ public class Player implements Cloneable{
 
     private void init(){
         if(priceSetter == null){
-            priceSetter = new PlayerPriceSetter();
+            priceSetter = PlayerPriceSetter.getInstance();
         }
         if(positions == null){
             positions = Arrays.asList(Position.GOALKEEPER, Position.DEFENDER,
